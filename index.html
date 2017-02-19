@@ -162,6 +162,7 @@
   }
 
   function playWithBackTrack(){
+    wavesurfer.load(window.url);
     console.log(window.url);
     window.rekaman = new Audio(window.url);
     rekaman.play();
@@ -172,6 +173,7 @@
     window.rekaman.pause();
     window.rekaman.currentTime = 0;
     wavesurfer.stop();
+    wavesurfer.load('alwayswithme.mp3');
   }
 
   window.onload = function init() {
