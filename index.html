@@ -62,9 +62,13 @@
   </script>
 
   <div class="controls">
-    <button class="btn btn-primary" onclick="wavesurfer.skipBackward()">
-      <i class="fa fa-step-backward"></i>
-      Backward
+    <button class="btn btn-primary" onclick="startRecording(this);">
+        <i class="fa fa-microphone"></i>
+        Record
+    </button>
+    <button class="btn btn-danger" onclick="stopRecording(this);" disabled>
+        <i class="fa fa-stop"></i>
+        Stop
     </button>
 
     <button class="btn btn-primary" onclick="wavesurfer.playPause()">
@@ -75,25 +79,15 @@
       Pause
     </button>
 
-    <button class="btn btn-primary" onclick="wavesurfer.skipForward()">
-      <i class="fa fa-step-forward"></i>
-      Forward
-    </button>
-
-    <button class="btn btn-primary" onclick="wavesurfer.toggleMute()">
-      <i class="fa fa-volume-off"></i>
-      Toggle Mute
-    </button>
-
     <button class="btn btn-primary" onclick="playWithBackTrack()">
       <i class="fa fa-play"></i>
       Play with Back Track
     </button>
+    <button class="btn btn-primary" onclick="stopAll()">
+      <i class="fa fa-stop"></i>
+      Stop
+    </button>
   </div>
-
-  <button class="btn btn-primary" onclick="startRecording(this);">record</button>
-  <button class="btn btn-danger" onclick="stopRecording(this);" disabled>stop</button>
-
 </div>
 
   </div>
@@ -147,10 +141,10 @@
     recorder.clear();
   }
 
-  var url;
   function createDownloadLink() {
     recorder && recorder.exportWAV(function(blob) {
-      var url = URL.createObjectURL(blob);
+      window.url = URL.createObjectURL(blob);
+      
       var li = document.createElement('li');
       var au = document.createElement('audio');
       var hf = document.createElement('a');
@@ -159,16 +153,25 @@
       au.src = url;
       hf.href = url;
       hf.download = new Date().toISOString() + '.wav';
-      //hf.download = 'rekamanmu' + '.wav';
       hf.innerHTML = hf.download;
       li.appendChild(au);
       li.appendChild(hf);
       recordingslist.appendChild(li);
+      
     });
   }
 
   function playWithBackTrack(){
-    alert(window.url);
+    console.log(window.url);
+    window.rekaman = new Audio(window.url);
+    rekaman.play();
+    wavesurfer.play();
+  }
+
+  function stopAll(){
+    window.rekaman.pause();
+    window.rekaman.currentTime = 0;
+    wavesurfer.stop();
   }
 
   window.onload = function init() {
