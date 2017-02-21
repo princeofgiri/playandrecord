@@ -88,6 +88,12 @@
       Stop
     </button>
   </div>
+    <form class="form-inline" style="color: black; text-align: center">
+      <div class="form-group">
+        <label for="latency">Latency Correction in milisecond:</label>
+        <input type="text" class="form-control" id="latency" size="4">
+      </div>
+    </form>
 </div>
 
   </div>
@@ -162,18 +168,18 @@
   }
 
   function playWithBackTrack(){
-    wavesurfer.load(window.url);
+    
     console.log(window.url);
     window.rekaman = new Audio(window.url);
     rekaman.play();
-    wavesurfer.play();
+    setTimeout(wavesurfer.play(), 500);
   }
 
   function stopAll(){
     window.rekaman.pause();
     window.rekaman.currentTime = 0;
     wavesurfer.stop();
-    wavesurfer.load('alwayswithme.mp3');
+    
   }
 
   window.onload = function init() {
