@@ -168,11 +168,12 @@
   }
 
   function playWithBackTrack(){
-    
     console.log(window.url);
     window.rekaman = new Audio(window.url);
     rekaman.play();
-    setTimeout(wavesurfer.play(), 500);
+    setTimeout(function(){
+      wavesurfer.play()
+    }, 5000);
   }
 
   function stopAll(){
