@@ -91,7 +91,7 @@
     <form class="form-inline" style="color: black; text-align: center">
       <div class="form-group">
         <label for="latency">Latency Correction in milisecond:</label>
-        <input type="text" class="form-control" id="latency" size="4">
+        <input type="text" class="form-control" id="latency" value=20 size="4">
       </div>
     </form>
 </div>
@@ -173,7 +173,7 @@
     rekaman.play();
     setTimeout(function(){
       wavesurfer.play()
-    }, 5000);
+    }, document.getElementById("latency").value);
   }
 
   function stopAll(){
