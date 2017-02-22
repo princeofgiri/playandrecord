@@ -58,8 +58,11 @@
       document.getElementById('progress').style.display = 'none';
     });
 
-    wavesurfer.load('alwayswithme.mp3');
+
   </script>
+  <div style="text-align: center">
+    <input type="file" id="backTrack" class="btn btn-warning"/>
+  </div>
 
   <div class="controls">
     <button class="btn btn-primary" onclick="startRecording(this);">
@@ -125,6 +128,19 @@
     recorder = new Recorder(input);
     __log('Recorder initialised.');
   }
+
+  document.getElementById('backTrack').onchange = function(){
+  var reader = new FileReader();
+  reader.onload = function(e) {
+
+    };
+
+  reader.readAsDataURL(this.files[0]);
+  window.backtrack = URL.createObjectURL(this.files[0]);
+  console.log(window.backtrack);
+  wavesurfer.load(window.backtrack);
+  }
+
 
   function startRecording(button) {
     recorder && recorder.record();
